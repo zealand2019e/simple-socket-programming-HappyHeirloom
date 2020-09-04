@@ -31,12 +31,19 @@ namespace EchoServer
             StreamReader reader = new StreamReader(ns);
             StreamWriter writer = new StreamWriter(ns) { AutoFlush = true };
 
+            var wordsSent = 0;
             string inputLine = "";
             while (inputLine != null)
             {
                 inputLine = reader.ReadLine();
                 writer.WriteLine($"Echoing string: {inputLine}");
                 Console.WriteLine($"Echoing string: {inputLine}");
+
+                var wordsArray = inputLine.Split(" ");
+
+                wordsSent = wordsSent + wordsArray.Length;
+
+                Console.WriteLine($"Number of words sent: {wordsSent}");
             }
             Console.WriteLine("Server disconnected...");
         }
