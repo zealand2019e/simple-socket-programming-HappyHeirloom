@@ -36,8 +36,8 @@ namespace EchoServer
             while (inputLine != null)
             {
                 inputLine = reader.ReadLine();
-                writer.WriteLine($"Echoing string: {inputLine}");
-                Console.WriteLine($"Echoing string: {inputLine}");
+                writer.WriteLine($"string: {inputLine}");
+                Console.WriteLine($"string: {inputLine}");
 
                 var wordsArray = inputLine.Split(" ");
 
