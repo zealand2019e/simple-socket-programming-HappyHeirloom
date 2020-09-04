@@ -36,7 +36,7 @@ namespace EchoServer
             {
                 inputLine = reader.ReadLine();
                 writer.WriteLine($"Echoing string: {inputLine}");
-                Console.WriteLine("Echoing string: " + inputLine);
+                Console.WriteLine($"Echoing string: {inputLine}");
             }
             Console.WriteLine("Server disconnected...");
         }
