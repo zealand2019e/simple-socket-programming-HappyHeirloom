@@ -7,18 +7,20 @@ using System.Text;
 
 namespace EchoServer
 {
-    class Server
+    public class Server
     {
 
         public static void Start()
         {
-            int port = 7;
-            TcpClient client = new TcpClient("localhost",  port);
+            int port = 7777;
             TcpListener listener = new TcpListener(IPAddress.Loopback, port);
+            listener.Start();
 
-            using (client)
+            TcpClient socket = listener.AcceptTcpClient();
+
+            using (socket)
             {
-                DoClient(client);
+                DoClient(socket);
             }
 
         }
@@ -29,12 +31,14 @@ namespace EchoServer
             StreamReader reader = new StreamReader(ns);
             StreamWriter writer = new StreamWriter(ns) { AutoFlush = true };
 
-            Console.WriteLine("Enter text to send to server");
-            string line = Console.ReadLine();
-            Console.WriteLine($"Sending {line} to server");
-            writer.WriteLine(line);
-            string lineReceived = reader.ReadLine();
-            Console.WriteLine($"Received {lineReceived} from server");
+            string inputLine = "";
+            while (inputLine != null)
+            {
+                inputLine = reader.ReadLine();
+                writer.WriteLine($"Echoing string: {inputLine}");
+                Console.WriteLine("Echoing string: " + inputLine);
+            }
+            Console.WriteLine("Server disconnected...");
         }
     }
 }
